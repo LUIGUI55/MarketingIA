@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(5, 5, 5, 0.9)', titleColor: '#fff', bodyColor: '#cbd5e1', padding: 12, borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, displayColors: false } },
+            plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(26, 11, 46, 0.9)', titleColor: '#fff', bodyColor: '#cbd5e1', padding: 12, borderColor: 'rgba(255,255,255,0.2)', borderWidth: 1, displayColors: false } },
             interaction: { intersect: false, mode: 'index' },
             scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v / 1000 + 'k' } }, x: { grid: { display: false } } }
         }
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             y: ['Cantidad', 'Precio Unitario', 'Ventas', 'MSRP'],
             type: 'heatmap',
             colorscale: [
-                [0, 'rgba(5, 5, 5, 0.8)'],        // Pure Ultra Dark
+                [0, 'rgba(26, 11, 46, 0.8)'],        // Vivid Deep Purple
                 [0.3, 'rgba(0, 240, 255, 0.7)'],  // Neon Cyan
                 [0.7, 'rgba(176, 38, 255, 0.8)'],  // Neon Purple
                 [1, 'rgba(255, 0, 85, 0.9)']     // Magenta Pink
