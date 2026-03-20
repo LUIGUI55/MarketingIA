@@ -491,3 +491,26 @@ input:checked+.slider:before {
         display: none;
     }
 }
+
+/* Pandas Glassmorphism Table */
+.pandas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-align: left;
+}
+.pandas-table th {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 15px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.pandas-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+}
+.pandas-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}

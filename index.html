@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>AI Marketing Dashboard</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Plotly.js for 3D Charts -->
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -22,7 +24,7 @@
         <!-- Sidebar -->
         <aside class="glass-panel sidebar">
             <div class="logo">
-                <h2>.:Marketing<span class="accent">:.</span></h2>
+                <h2>Nexus<span class="accent">AI</span></h2>
             </div>
 
             <div class="sidebar-section">
@@ -42,43 +44,37 @@
             </div>
 
             <div class="sidebar-section">
-                <h3 class="section-title">Selector de Gráficas</h3>
+                <h3 class="section-title">Selector de Vistas</h3>
                 <div class="toggle-list">
-                    <!-- Toggles -->
+                    <!-- Toggles Iniciales -->
                     <label class="toggle-item">
                         <span class="toggle-label">Ventas Históricas</span>
-                        <div class="toggle-switch">
-                            <input type="checkbox" id="toggle-sales" checked>
-                            <span class="slider"></span>
-                        </div>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-sales" checked><span class="slider"></span></div>
                     </label>
                     <label class="toggle-item">
                         <span class="toggle-label">Pedidos por País</span>
-                        <div class="toggle-switch">
-                            <input type="checkbox" id="toggle-country" checked>
-                            <span class="slider"></span>
-                        </div>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-country" checked><span class="slider"></span></div>
                     </label>
                     <label class="toggle-item">
                         <span class="toggle-label">Línea de Productos</span>
-                        <div class="toggle-switch">
-                            <input type="checkbox" id="toggle-product" checked>
-                            <span class="slider"></span>
-                        </div>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-product" checked><span class="slider"></span></div>
                     </label>
                     <label class="toggle-item">
                         <span class="toggle-label">Estado del Pedido</span>
-                        <div class="toggle-switch">
-                            <input type="checkbox" id="toggle-status" checked>
-                            <span class="slider"></span>
-                        </div>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-status" checked><span class="slider"></span></div>
                     </label>
                     <label class="toggle-item">
                         <span class="toggle-label">Tamaño del Trato</span>
-                        <div class="toggle-switch">
-                            <input type="checkbox" id="toggle-deal" checked>
-                            <span class="slider"></span>
-                        </div>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-deal" checked><span class="slider"></span></div>
+                    </label>
+                    <!-- Nuevos Toggles -->
+                    <label class="toggle-item">
+                        <span class="toggle-label" style="color: var(--accent-teal);">K-Means Clusters 3D</span>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-3d" checked><span class="slider"></span></div>
+                    </label>
+                    <label class="toggle-item">
+                        <span class="toggle-label" style="color: var(--accent-blue);">Datos de Pandas</span>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-table" checked><span class="slider"></span></div>
                     </label>
                 </div>
             </div>
@@ -89,7 +85,7 @@
             <header class="header glass-panel">
                 <div class="header-left">
                     <h1>Resumen de Marketing AI</h1>
-                    <p>Métricas extraídas del modelo K-Means</p>
+                    <p>Métricas extraídas del modelo K-Means y Dataframes</p>
                 </div>
                 <div class="header-right">
                     <div class="profile-info">
@@ -161,6 +157,44 @@
             <!-- Dynamic Charts Section -->
             <section class="charts-grid" id="charts-grid-container">
 
+                <!-- [NEW] Pandas Data Table -->
+                <div class="chart-container glass-panel fade-in" id="card-table" style="animation-delay: 0.35s; grid-column: 1 / -1;">
+                    <div class="chart-header">
+                        <h3>Muestra de Datos (Pandas DataFrame)</h3>
+                    </div>
+                    <div class="chart-body" style="overflow-x: auto;">
+                        <table class="pandas-table">
+                            <thead>
+                                <tr>
+                                    <th>ORDERNUMBER</th>
+                                    <th>QUANTITYORDERED</th>
+                                    <th>PRICEEACH</th>
+                                    <th>SALES</th>
+                                    <th>ORDERDATE</th>
+                                    <th>PRODUCTLINE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>10107</td><td>30</td><td>95.70</td><td>$2,871.00</td><td>2003-02-24</td><td>Motorcycles</td></tr>
+                                <tr><td>10121</td><td>34</td><td>81.35</td><td>$2,765.90</td><td>2003-05-07</td><td>Motorcycles</td></tr>
+                                <tr><td>10134</td><td>41</td><td>94.74</td><td>$3,884.34</td><td>2003-07-01</td><td>Motorcycles</td></tr>
+                                <tr><td>10145</td><td>45</td><td>83.26</td><td>$3,746.70</td><td>2003-08-25</td><td>Motorcycles</td></tr>
+                                <tr><td>10159</td><td>49</td><td>100.00</td><td>$5,205.27</td><td>2003-10-10</td><td>Motorcycles</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- [NEW] Plotly 3D Chart -->
+                <div class="chart-container glass-panel fade-in" id="card-3d" style="animation-delay: 0.38s; grid-column: 1 / -1; height: 500px;">
+                    <div class="chart-header">
+                        <h3>Clusters K-Means en 3D (Ventas, Precio, Cantidad)</h3>
+                    </div>
+                    <div class="chart-body" id="plotly3d-container">
+                        <!-- Plotly chart renders here -->
+                    </div>
+                </div>
+
                 <div class="chart-container glass-panel fade-in" id="card-sales" style="animation-delay: 0.4s;">
                     <div class="chart-header">
                         <h3>Ventas Históricas por Mes</h3>
@@ -169,7 +203,7 @@
                         <canvas id="salesChart"></canvas>
                     </div>
                 </div>
-
+                
                 <div class="chart-container glass-panel fade-in" id="card-country" style="animation-delay: 0.5s;">
                     <div class="chart-header">
                         <h3>Top Países por Pedidos</h3>

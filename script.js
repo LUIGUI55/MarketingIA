@@ -103,13 +103,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- 6. Plotly 3D Chart ---
+    const plotContainer = document.getElementById('plotly3d-container');
+    if (plotContainer && typeof Plotly !== 'undefined') {
+        const genCluster = (n, cx, cy, cz, s) => {
+            let x=[], y=[], z=[];
+            for(let i=0; i<n; i++){
+                x.push(cx + (Math.random()-0.5)*s);
+                y.push(cy + (Math.random()-0.5)*s);
+                z.push(cz + (Math.random()-0.5)*s*0.3);
+            }
+            return {x, y, z};
+        };
+
+        const c1 = genCluster(50, 2000, 50, 20, 1000);
+        const c2 = genCluster(50, 5000, 80, 40, 1500);
+        const c3 = genCluster(50, 8000, 120, 60, 2000);
+
+        const data3D = [
+            { x: c1.x, y: c1.y, z: c1.z, mode: 'markers', marker: { size: 5, color: '#3b82f6', opacity: 0.8 }, type: 'scatter3d', name: 'Cluster 1' },
+            { x: c2.x, y: c2.y, z: c2.z, mode: 'markers', marker: { size: 5, color: '#8b5cf6', opacity: 0.8 }, type: 'scatter3d', name: 'Cluster 2' },
+            { x: c3.x, y: c3.y, z: c3.z, mode: 'markers', marker: { size: 5, color: '#14b8a6', opacity: 0.8 }, type: 'scatter3d', name: 'Cluster 3' }
+        ];
+
+        const layout3D = {
+            margin: { l: 0, r: 0, b: 0, t: 0 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#94a3b8', family: 'Inter' },
+            scene: {
+                xaxis: { title: 'Ventas ($)', gridcolor: 'rgba(255,255,255,0.1)', backgroundcolor: 'rgba(0,0,0,0)' },
+                yaxis: { title: 'Precio ($)', gridcolor: 'rgba(255,255,255,0.1)', backgroundcolor: 'rgba(0,0,0,0)' },
+                zaxis: { title: 'Cantidad', gridcolor: 'rgba(255,255,255,0.1)', backgroundcolor: 'rgba(0,0,0,0)' }
+            },
+            legend: { x: 0, y: 1 }
+        };
+
+        Plotly.newPlot(plotContainer, data3D, layout3D, {responsive: true});
+    }
+
     // --- Toggle Logic ---
     const toggleMap = {
         'toggle-sales': 'card-sales',
         'toggle-country': 'card-country',
         'toggle-product': 'card-product',
         'toggle-status': 'card-status',
-        'toggle-deal': 'card-deal'
+        'toggle-deal': 'card-deal',
+        'toggle-3d': 'card-3d',
+        'toggle-table': 'card-table'
     };
 
     Object.keys(toggleMap).forEach(toggleId => {
