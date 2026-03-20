@@ -262,6 +262,67 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- 9. Line Chart: Método del Codo (Elbow) ---
+    const ctxElbow = document.getElementById('elbowChart');
+    if (ctxElbow) {
+        const gradientElbow = ctxElbow.getContext('2d').createLinearGradient(0, 0, 0, 400);
+        gradientElbow.addColorStop(0, 'rgba(255, 0, 85, 0.5)'); // hot pink
+        gradientElbow.addColorStop(1, 'rgba(255, 0, 85, 0.0)');
+
+        let elbowChartInstance = null;
+
+        const renderElbow = (maxK) => {
+            const labels = Array.from({length: maxK}, (_, i) => (i + 1).toString());
+            const data = Array.from({length: maxK}, (_, i) => Math.round(500000 / (i + 1) + 50000 * Math.exp(-i)));
+
+            if (elbowChartInstance) {
+                elbowChartInstance.destroy();
+            }
+
+            elbowChartInstance = new Chart(ctxElbow, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Inercia (WCSS)',
+                        data: data,
+                        borderColor: '#ff0055',
+                        backgroundColor: gradientElbow,
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#050505',
+                        pointBorderColor: '#ff0055',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(26, 11, 46, 0.9)', titleColor: '#fff', bodyColor: '#cbd5e1', padding: 12, borderColor: 'rgba(255,255,255,0.2)', borderWidth: 1, displayColors: false } },
+                    interaction: { intersect: false, mode: 'index' },
+                    scales: { 
+                        y: { beginAtZero: false, title: { display: true, text: 'Inercia (WCSS)', color: '#a1a1aa' } }, 
+                        x: { title: { display: true, text: 'Número de Clústeres (K)', color: '#a1a1aa' }, grid: { display: false } } 
+                    }
+                }
+            });
+        };
+
+        renderElbow(10);
+
+        const elbowInput = document.getElementById('elbow-input');
+        if (elbowInput) {
+            elbowInput.addEventListener('input', (e) => {
+                let maxK = parseInt(e.target.value);
+                if (maxK >= 3 && maxK <= 50) {
+                    renderElbow(maxK);
+                }
+            });
+        }
+    }
+
     // --- Toggle Logic ---
     const toggleMap = {
         'toggle-sales': 'card-sales',
@@ -272,6 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'toggle-3d': 'card-3d',
         'toggle-heatmap': 'card-heatmap',
         'toggle-pca': 'card-pca',
+        'toggle-elbow': 'card-elbow',
         'toggle-table': 'card-table'
     };
 

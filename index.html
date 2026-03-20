@@ -93,6 +93,11 @@
                         <div class="toggle-switch"><input type="checkbox" id="toggle-pca" checked><span
                                 class="slider"></span></div>
                     </label>
+                    <label class="toggle-item">
+                        <span class="toggle-label" style="color: var(--accent-pink);">Método del Codo</span>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-elbow" checked><span
+                                class="slider"></span></div>
+                    </label>
                 </div>
             </div>
         </aside>
@@ -326,6 +331,21 @@
                     </div>
                     <div class="chart-body">
                         <canvas id="dealChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- [NEW] Chart.js Elbow Method -->
+                <div class="chart-container glass-panel fade-in" id="card-elbow" style="animation-delay: 0.9s; grid-column: 1 / -1; min-height: 400px;">
+                    <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                        <h3>Método del Codo (Elbow Method)</h3>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <label for="elbow-input" style="font-size: 0.9rem; color: var(--text-secondary);">Límite K:</label>
+                            <input type="number" id="elbow-input" value="10" min="3" max="30"
+                                style="width: 60px; padding: 6px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.3); color: white; font-family: 'Inter', sans-serif; outline: none;">
+                        </div>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="elbowChart"></canvas>
                     </div>
                 </div>
 
