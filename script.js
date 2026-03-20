@@ -53,55 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle' } } } }
     });
 
-    // --- 3. Bar Chart: Línea de Productos ---
-    const ctxProduct = document.getElementById('productChart').getContext('2d');
-    new Chart(ctxProduct, {
-        type: 'bar',
-        data: {
-            labels: ['Classic Cars', 'Vintage Cars', 'Motorcycles', 'Planes', 'Trucks', 'Ships', 'Trains'],
-            datasets: [{
-                label: 'Cantidad',
-                data: [967, 607, 331, 306, 301, 234, 77],
-                backgroundColor: '#b026ff',
-                borderRadius: 6
-            }]
-        },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } }
-    });
-
-    // --- 4. Pie Chart: Estado del Pedido ---
-    const ctxStatus = document.getElementById('statusChart').getContext('2d');
-    new Chart(ctxStatus, {
-        type: 'pie',
-        data: {
-            labels: ['Enviado', 'Cancelado', 'Resuelto', 'En Espera', 'En Proceso', 'Disputado'],
-            datasets: [{
-                data: [2617, 60, 47, 44, 41, 14],
-                backgroundColor: ['#00ff88', '#ff003c', '#00f0ff', '#ff7300', '#b026ff', '#ff0055'],
-                borderWidth: 0, hoverOffset: 4
-            }]
-        },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle' } } } }
-    });
-
-    // --- 5. Polar Area Chart: Tamaño del Trato ---
-    const ctxDeal = document.getElementById('dealChart').getContext('2d');
-    new Chart(ctxDeal, {
-        type: 'polarArea',
-        data: {
-            labels: ['Pequeño', 'Mediano', 'Grande'],
-            datasets: [{
-                data: [1282, 1384, 157],
-                backgroundColor: ['rgba(0, 240, 255, 0.7)', 'rgba(176, 38, 255, 0.7)', 'rgba(0, 255, 136, 0.7)'],
-                borderWidth: 0
-            }]
-        },
-        options: { 
-            responsive: true, maintainAspectRatio: false, 
-            scales: { r: { ticks: { display: false }, grid: { color: 'rgba(255, 255, 255, 0.1)' } } },
-            plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle' } } } 
-        }
-    });
 
     // --- 6. Plotly 3D Chart (Dynamic) ---
     const plotContainer = document.getElementById('plotly3d-container');
@@ -327,9 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleMap = {
         'toggle-sales': 'card-sales',
         'toggle-country': 'card-country',
-        'toggle-product': 'card-product',
-        'toggle-status': 'card-status',
-        'toggle-deal': 'card-deal',
         'toggle-3d': 'card-3d',
         'toggle-heatmap': 'card-heatmap',
         'toggle-pca': 'card-pca',
