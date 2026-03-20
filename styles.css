@@ -1,17 +1,16 @@
-/* Custom Props & Color Palette */
 :root {
-    --bg-dark: #0f172a;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --bg-dark: #050505;
+    --text-primary: #f5f5f5;
+    --text-secondary: #a1a1aa;
 
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glass-bg: rgba(20, 20, 20, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.04);
+    --glass-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.8);
 
-    --accent-blue: #3b82f6;
-    --accent-purple: #8b5cf6;
-    --accent-teal: #14b8a6;
-    --accent-pink: #ec4899;
+    --accent-blue: #0070f3;
+    --accent-purple: #7928ca;
+    --accent-teal: #00dfd8;
+    --accent-pink: #ff0080;
 }
 
 * {
@@ -29,14 +28,13 @@ body {
     position: relative;
 }
 
-/* Background Animated Blobs */
 .blob {
     position: fixed;
     border-radius: 50%;
-    filter: blur(80px);
+    filter: blur(100px);
     z-index: -1;
-    opacity: 0.5;
-    animation: float 20s infinite ease-in-out alternate;
+    opacity: 0.12;
+    animation: float 25s infinite ease-in-out alternate;
 }
 
 .blob-1 {
@@ -97,8 +95,8 @@ body {
 /* Glassmorphism Panel Base */
 .glass-panel {
     background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     box-shadow: var(--glass-shadow);

@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Line Chart: Ventas Históricas ---
     const ctxSales = document.getElementById('salesChart').getContext('2d');
     const gradientSales = ctxSales.createLinearGradient(0, 0, 0, 400);
-    gradientSales.addColorStop(0, 'rgba(59, 130, 246, 0.5)');
-    gradientSales.addColorStop(1, 'rgba(59, 130, 246, 0.0)');
+    gradientSales.addColorStop(0, 'rgba(0, 112, 243, 0.5)');
+    gradientSales.addColorStop(1, 'rgba(0, 112, 243, 0.0)');
 
     new Chart(ctxSales, {
         type: 'line',
@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
                 label: 'Ventas ($)',
                 data: [12916.3, 20182.1, 28019.2, 54702.0, 31102.3, 42103.4, 55201.2, 78103.5, 41203.1, 48201.0],
-                borderColor: '#3b82f6',
+                borderColor: '#0070f3',
                 backgroundColor: gradientSales,
                 borderWidth: 3,
                 tension: 0.4,
                 fill: true,
-                pointBackgroundColor: '#0f172a',
-                pointBorderColor: '#3b82f6',
+                pointBackgroundColor: '#050505',
+                pointBorderColor: '#0070f3',
                 pointBorderWidth: 2,
                 pointRadius: 4,
                 pointHoverRadius: 6
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)', titleColor: '#fff', bodyColor: '#cbd5e1', padding: 12, borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, displayColors: false } },
+            plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(5, 5, 5, 0.9)', titleColor: '#fff', bodyColor: '#cbd5e1', padding: 12, borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, displayColors: false } },
             interaction: { intersect: false, mode: 'index' },
             scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v / 1000 + 'k' } }, x: { grid: { display: false } } }
         }
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: ['USA', 'Spain', 'France', 'Australia', 'Otros'],
             datasets: [{
                 data: [1004, 342, 314, 185, 978],
-                backgroundColor: ['#3b82f6', '#8b5cf6', '#14b8a6', '#ec4899', 'rgba(255, 255, 255, 0.1)'],
+                backgroundColor: ['#0070f3', '#7928ca', '#00dfd8', '#ff0080', 'rgba(255, 255, 255, 0.08)'],
                 borderWidth: 0, hoverOffset: 4
             }]
         },
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
                 label: 'Cantidad',
                 data: [967, 607, 331, 306, 301, 234, 77],
-                backgroundColor: '#8b5cf6',
+                backgroundColor: '#7928ca',
                 borderRadius: 6
             }]
         },
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: ['Enviado', 'Cancelado', 'Resuelto', 'En Espera', 'En Proceso', 'Disputado'],
             datasets: [{
                 data: [2617, 60, 47, 44, 41, 14],
-                backgroundColor: ['#14b8a6', '#ef4444', '#3b82f6', '#f59e0b', '#8b5cf6', '#ec4899'],
+                backgroundColor: ['#00dfd8', '#ff0000', '#0070f3', '#f5a623', '#7928ca', '#ff0080'],
                 borderWidth: 0, hoverOffset: 4
             }]
         },
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: ['Pequeño', 'Mediano', 'Grande'],
             datasets: [{
                 data: [1282, 1384, 157],
-                backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(139, 92, 246, 0.7)', 'rgba(20, 184, 166, 0.7)'],
+                backgroundColor: ['rgba(0, 112, 243, 0.7)', 'rgba(121, 40, 202, 0.7)', 'rgba(0, 223, 216, 0.7)'],
                 borderWidth: 0
             }]
         },
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const renderClusters = (numClusters) => {
             const data3D = [];
-            const colors = ['#3b82f6', '#8b5cf6', '#14b8a6', '#ec4899', '#f59e0b', '#ef4444', '#10b981', '#6366f1', '#eab308', '#d946ef'];
+            const colors = ['#0070f3', '#7928ca', '#00dfd8', '#ff0080', '#f5a623', '#ff0000', '#10b981', '#6366f1', '#eab308', '#d946ef'];
             
             for(let i=0; i<numClusters; i++) {
                 const cx = 1000 + Math.random() * 8000;
@@ -176,10 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
             y: ['Cantidad', 'Precio Unitario', 'Ventas', 'MSRP'],
             type: 'heatmap',
             colorscale: [
-                [0, 'rgba(15, 23, 42, 0.8)'],     // Dark slate base
-                [0.3, 'rgba(59, 130, 246, 0.7)'], // Blue accent
-                [0.7, 'rgba(139, 92, 246, 0.8)'], // Purple accent
-                [1, 'rgba(236, 72, 153, 0.9)']    // Pink hot
+                [0, 'rgba(5, 5, 5, 0.8)'],        // Pure Ultra Dark
+                [0.3, 'rgba(0, 112, 243, 0.7)'],  // Elegant Blue
+                [0.7, 'rgba(121, 40, 202, 0.8)'],  // Lilac Purple
+                [1, 'rgba(255, 0, 128, 0.9)']     // Magenta Pink
             ],
             text: [
                 [1.00, 0.01, 0.55, 0.02], 
