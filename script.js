@@ -209,6 +209,43 @@ document.addEventListener('DOMContentLoaded', () => {
         Plotly.newPlot(heatmapContainer, heatmapData, heatmapLayout, {responsive: true});
     }
 
+    // --- 8. Plotly PCA 2D Scatter ---
+    const pcaContainer = document.getElementById('plotly-pca-container');
+    if (pcaContainer && typeof Plotly !== 'undefined') {
+        const pcaData = [];
+        const pcaColors = ['#00f0ff', '#b026ff', '#00ff88', '#ff0055', '#ff7300'];
+        
+        for (let i = 0; i < 5; i++) {
+            const numPoints = 80;
+            const offsetX = (Math.random() - 0.5) * 8;
+            const offsetY = (Math.random() - 0.5) * 8;
+            
+            const pc1 = Array.from({length: numPoints}, () => offsetX + (Math.random() - 0.5) * 3);
+            const pc2 = Array.from({length: numPoints}, () => offsetY + (Math.random() - 0.5) * 3);
+            
+            pcaData.push({
+                x: pc1,
+                y: pc2,
+                mode: 'markers',
+                type: 'scatter',
+                name: `Cluster ${i + 1}`,
+                marker: { size: 8, color: pcaColors[i], opacity: 0.8, line: { width: 1, color: '#050505' } }
+            });
+        }
+
+        const pcaLayout = {
+            margin: { l: 40, r: 20, b: 40, t: 20 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#a1a1aa', family: "'Inter', sans-serif" },
+            xaxis: { title: 'Componente Principal 1', gridcolor: 'rgba(255,255,255,0.04)', zerolinecolor: 'rgba(255,255,255,0.1)' },
+            yaxis: { title: 'Componente Principal 2', gridcolor: 'rgba(255,255,255,0.04)', zerolinecolor: 'rgba(255,255,255,0.1)' },
+            legend: { orientation: 'h', y: -0.2 }
+        };
+
+        Plotly.newPlot(pcaContainer, pcaData, pcaLayout, {responsive: true});
+    }
+
     // --- Toggle Logic ---
     const toggleMap = {
         'toggle-sales': 'card-sales',
@@ -218,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'toggle-deal': 'card-deal',
         'toggle-3d': 'card-3d',
         'toggle-heatmap': 'card-heatmap',
+        'toggle-pca': 'card-pca',
         'toggle-table': 'card-table'
     };
 

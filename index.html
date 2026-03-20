@@ -88,6 +88,11 @@
                         <div class="toggle-switch"><input type="checkbox" id="toggle-table" checked><span
                                 class="slider"></span></div>
                     </label>
+                    <label class="toggle-item">
+                        <span class="toggle-label" style="color: var(--accent-purple);">Análisis PCA</span>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-pca" checked><span
+                                class="slider"></span></div>
+                    </label>
                 </div>
             </div>
         </aside>
@@ -230,6 +235,17 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                <!-- [NEW] Plotly PCA 2D Chart -->
+                <div class="chart-container glass-panel fade-in" id="card-pca"
+                    style="animation-delay: 0.36s; grid-column: 1 / -1; min-height: 450px;">
+                    <div class="chart-header">
+                        <h3>Análisis de Componentes Principales (PCA)</h3>
+                    </div>
+                    <div class="chart-body" id="plotly-pca-container">
+                        <!-- Plotly PCA renders here -->
                     </div>
                 </div>
 
