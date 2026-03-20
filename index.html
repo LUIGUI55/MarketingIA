@@ -69,6 +69,10 @@
                     </label>
                     <!-- Nuevos Toggles -->
                     <label class="toggle-item">
+                        <span class="toggle-label" style="color: var(--accent-pink);">Matriz de Correlación</span>
+                        <div class="toggle-switch"><input type="checkbox" id="toggle-heatmap" checked><span class="slider"></span></div>
+                    </label>
+                    <label class="toggle-item">
                         <span class="toggle-label" style="color: var(--accent-teal);">K-Means Clusters 3D</span>
                         <div class="toggle-switch"><input type="checkbox" id="toggle-3d" checked><span class="slider"></span></div>
                     </label>
@@ -196,6 +200,16 @@
                     </div>
                     <div class="chart-body" id="plotly3d-container">
                         <!-- Plotly chart renders here -->
+                    </div>
+                </div>
+
+                <!-- [NEW] Plotly Correlation Heatmap -->
+                <div class="chart-container glass-panel fade-in" id="card-heatmap" style="animation-delay: 0.39s; grid-column: 1 / -1; min-height: 400px;">
+                    <div class="chart-header">
+                        <h3>Matriz de Correlación (Heatmap)</h3>
+                    </div>
+                    <div class="chart-body" id="plotly-heatmap-container">
+                        <!-- Plotly heatmap renders here -->
                     </div>
                 </div>
 

@@ -162,6 +162,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- 7. Plotly Correlation Heatmap ---
+    const heatmapContainer = document.getElementById('plotly-heatmap-container');
+    if (heatmapContainer && typeof Plotly !== 'undefined') {
+        const heatmapData = [{
+            z: [
+                [1.00, 0.01, 0.55, 0.02], 
+                [0.01, 1.00, 0.66, 0.95], 
+                [0.55, 0.66, 1.00, 0.64], 
+                [0.02, 0.95, 0.64, 1.00]
+            ],
+            x: ['Cantidad', 'Precio Unitario', 'Ventas', 'MSRP'],
+            y: ['Cantidad', 'Precio Unitario', 'Ventas', 'MSRP'],
+            type: 'heatmap',
+            colorscale: [
+                [0, 'rgba(15, 23, 42, 0.8)'],     // Dark slate base
+                [0.3, 'rgba(59, 130, 246, 0.7)'], // Blue accent
+                [0.7, 'rgba(139, 92, 246, 0.8)'], // Purple accent
+                [1, 'rgba(236, 72, 153, 0.9)']    // Pink hot
+            ],
+            text: [
+                [1.00, 0.01, 0.55, 0.02], 
+                [0.01, 1.00, 0.66, 0.95], 
+                [0.55, 0.66, 1.00, 0.64], 
+                [0.02, 0.95, 0.64, 1.00]
+            ],
+            texttemplate: "%{text}",
+            textfont: { color: "#ffffff", family: "'Inter', sans-serif" },
+            hoverongaps: false,
+            showscale: true,
+            colorbar: {
+                tickfont: { color: '#94a3b8', family: "'Inter', sans-serif" },
+                outlinecolor: 'rgba(255,255,255,0.1)'
+            }
+        }];
+
+        const heatmapLayout = {
+            margin: { l: 80, r: 0, b: 60, t: 20 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#94a3b8', family: "'Inter', sans-serif" },
+            xaxis: { tickangle: -45 },
+            yaxis: { autorange: 'reversed' } // Standard correlation matrix visually
+        };
+
+        Plotly.newPlot(heatmapContainer, heatmapData, heatmapLayout, {responsive: true});
+    }
+
     // --- Toggle Logic ---
     const toggleMap = {
         'toggle-sales': 'card-sales',
@@ -170,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'toggle-status': 'card-status',
         'toggle-deal': 'card-deal',
         'toggle-3d': 'card-3d',
+        'toggle-heatmap': 'card-heatmap',
         'toggle-table': 'card-table'
     };
 
