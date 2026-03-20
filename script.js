@@ -1,0 +1,132 @@
+// Initialize Charts with dark theme styling
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.05)';
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- 1. Line Chart: Ventas Históricas ---
+    const ctxSales = document.getElementById('salesChart').getContext('2d');
+    const gradientSales = ctxSales.createLinearGradient(0, 0, 0, 400);
+    gradientSales.addColorStop(0, 'rgba(59, 130, 246, 0.5)');
+    gradientSales.addColorStop(1, 'rgba(59, 130, 246, 0.0)');
+
+    new Chart(ctxSales, {
+        type: 'line',
+        data: {
+            labels: ['Ene 03', 'Abr 03', 'Jul 03', 'Oct 03', 'Ene 04', 'Abr 04', 'Jul 04', 'Oct 04', 'Ene 05', 'Abr 05'],
+            datasets: [{
+                label: 'Ventas ($)',
+                data: [12916.3, 20182.1, 28019.2, 54702.0, 31102.3, 42103.4, 55201.2, 78103.5, 41203.1, 48201.0],
+                borderColor: '#3b82f6',
+                backgroundColor: gradientSales,
+                borderWidth: 3,
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: '#0f172a',
+                pointBorderColor: '#3b82f6',
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                pointHoverRadius: 6
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)', titleColor: '#fff', bodyColor: '#cbd5e1', padding: 12, borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, displayColors: false } },
+            interaction: { intersect: false, mode: 'index' },
+            scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v / 1000 + 'k' } }, x: { grid: { display: false } } }
+        }
+    });
+
+    // --- 2. Doughnut Chart: Top Países ---
+    const ctxCountry = document.getElementById('countryChart').getContext('2d');
+    new Chart(ctxCountry, {
+        type: 'doughnut',
+        data: {
+            labels: ['USA', 'Spain', 'France', 'Australia', 'Otros'],
+            datasets: [{
+                data: [1004, 342, 314, 185, 978],
+                backgroundColor: ['#3b82f6', '#8b5cf6', '#14b8a6', '#ec4899', 'rgba(255, 255, 255, 0.1)'],
+                borderWidth: 0, hoverOffset: 4
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle' } } } }
+    });
+
+    // --- 3. Bar Chart: Línea de Productos ---
+    const ctxProduct = document.getElementById('productChart').getContext('2d');
+    new Chart(ctxProduct, {
+        type: 'bar',
+        data: {
+            labels: ['Classic Cars', 'Vintage Cars', 'Motorcycles', 'Planes', 'Trucks', 'Ships', 'Trains'],
+            datasets: [{
+                label: 'Cantidad',
+                data: [967, 607, 331, 306, 301, 234, 77],
+                backgroundColor: '#8b5cf6',
+                borderRadius: 6
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } }
+    });
+
+    // --- 4. Pie Chart: Estado del Pedido ---
+    const ctxStatus = document.getElementById('statusChart').getContext('2d');
+    new Chart(ctxStatus, {
+        type: 'pie',
+        data: {
+            labels: ['Enviado', 'Cancelado', 'Resuelto', 'En Espera', 'En Proceso', 'Disputado'],
+            datasets: [{
+                data: [2617, 60, 47, 44, 41, 14],
+                backgroundColor: ['#14b8a6', '#ef4444', '#3b82f6', '#f59e0b', '#8b5cf6', '#ec4899'],
+                borderWidth: 0, hoverOffset: 4
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle' } } } }
+    });
+
+    // --- 5. Polar Area Chart: Tamaño del Trato ---
+    const ctxDeal = document.getElementById('dealChart').getContext('2d');
+    new Chart(ctxDeal, {
+        type: 'polarArea',
+        data: {
+            labels: ['Pequeño', 'Mediano', 'Grande'],
+            datasets: [{
+                data: [1282, 1384, 157],
+                backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(139, 92, 246, 0.7)', 'rgba(20, 184, 166, 0.7)'],
+                borderWidth: 0
+            }]
+        },
+        options: { 
+            responsive: true, maintainAspectRatio: false, 
+            scales: { r: { ticks: { display: false }, grid: { color: 'rgba(255, 255, 255, 0.1)' } } },
+            plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle' } } } 
+        }
+    });
+
+    // --- Toggle Logic ---
+    const toggleMap = {
+        'toggle-sales': 'card-sales',
+        'toggle-country': 'card-country',
+        'toggle-product': 'card-product',
+        'toggle-status': 'card-status',
+        'toggle-deal': 'card-deal'
+    };
+
+    Object.keys(toggleMap).forEach(toggleId => {
+        const checkbox = document.getElementById(toggleId);
+        const cardContainer = document.getElementById(toggleMap[toggleId]);
+
+        if (checkbox && cardContainer) {
+            checkbox.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    cardContainer.style.display = 'flex';
+                    setTimeout(() => cardContainer.classList.remove('hidden'), 10);
+                } else {
+                    cardContainer.classList.add('hidden');
+                    setTimeout(() => cardContainer.style.display = 'none', 300); // Wait for transition
+                }
+            });
+        }
+    });
+
+});

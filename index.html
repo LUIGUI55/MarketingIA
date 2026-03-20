@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Background Animated Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="glass-panel sidebar">
+            <div class="logo">
+                <h2>.:Marketing<span class="accent">:.</span></h2>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="section-title">Panel de Control</h3>
+                <nav class="nav-menu">
+                    <a href="#" class="nav-item active">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="section-title">Selector de Gráficas</h3>
+                <div class="toggle-list">
+                    <!-- Toggles -->
+                    <label class="toggle-item">
+                        <span class="toggle-label">Ventas Históricas</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="toggle-sales" checked>
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                    <label class="toggle-item">
+                        <span class="toggle-label">Pedidos por País</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="toggle-country" checked>
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                    <label class="toggle-item">
+                        <span class="toggle-label">Línea de Productos</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="toggle-product" checked>
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                    <label class="toggle-item">
+                        <span class="toggle-label">Estado del Pedido</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="toggle-status" checked>
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                    <label class="toggle-item">
+                        <span class="toggle-label">Tamaño del Trato</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="toggle-deal" checked>
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header glass-panel">
+                <div class="header-left">
+                    <h1>Resumen de Marketing AI</h1>
+                    <p>Métricas extraídas del modelo K-Means</p>
+                </div>
+                <div class="header-right">
+                    <div class="profile-info">
+                        <span class="status-indicator"></span>
+                        <span>En línea</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- KPIs Section -->
+            <section class="kpi-grid">
+                <!-- Ventas Totales -->
+                <div class="kpi-card glass-panel fade-in" style="animation-delay: 0.1s;">
+                    <div class="kpi-header">
+                        <div class="kpi-icon gradient-1">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <span class="kpi-badge positive">+14.5%</span>
+                    </div>
+                    <div class="kpi-content">
+                        <h3>Ventas Totales</h3>
+                        <div class="kpi-value counter" data-target="10032628">$10.03M</div>
+                        <p class="kpi-subtitle">Ingresos históricos simulados</p>
+                    </div>
+                </div>
+
+                <!-- Ordenes Totales -->
+                <div class="kpi-card glass-panel fade-in" style="animation-delay: 0.2s;">
+                    <div class="kpi-header">
+                        <div class="kpi-icon gradient-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                            </svg>
+                        </div>
+                        <span class="kpi-badge neutral">2823 Total</span>
+                    </div>
+                    <div class="kpi-content">
+                        <h3>Órdenes Totales</h3>
+                        <div class="kpi-value counter" data-target="2823">2,823</div>
+                        <p class="kpi-subtitle">Total de registros</p>
+                    </div>
+                </div>
+
+                <!-- Clusters a usar -->
+                <div class="kpi-card glass-panel fade-in" style="animation-delay: 0.3s;">
+                    <div class="kpi-header">
+                        <div class="kpi-icon gradient-3">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                </path>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                        </div>
+                        <span class="kpi-badge info">K-Means</span>
+                    </div>
+                    <div class="kpi-content">
+                        <h3>Clústeres Óptimos</h3>
+                        <div class="kpi-value counter" data-target="5">5</div>
+                        <p class="kpi-subtitle">Basado en Método del Codo</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dynamic Charts Section -->
+            <section class="charts-grid" id="charts-grid-container">
+
+                <div class="chart-container glass-panel fade-in" id="card-sales" style="animation-delay: 0.4s;">
+                    <div class="chart-header">
+                        <h3>Ventas Históricas por Mes</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container glass-panel fade-in" id="card-country" style="animation-delay: 0.5s;">
+                    <div class="chart-header">
+                        <h3>Top Países por Pedidos</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="countryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container glass-panel fade-in" id="card-product" style="animation-delay: 0.6s;">
+                    <div class="chart-header">
+                        <h3>Línea de Productos</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="productChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container glass-panel fade-in" id="card-status" style="animation-delay: 0.7s;">
+                    <div class="chart-header">
+                        <h3>Estado del Pedido</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container glass-panel fade-in" id="card-deal" style="animation-delay: 0.8s;">
+                    <div class="chart-header">
+                        <h3>Tamaño del Trato</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="dealChart"></canvas>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
