@@ -84,10 +84,10 @@ body {
 /* Layout */
 .dashboard-container {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 285px 1fr;
     min-height: 100vh;
-    padding: 20px;
-    gap: 20px;
+    padding: 25px;
+    gap: 25px;
     max-width: 1800px;
     margin: 0 auto;
 }
@@ -498,17 +498,20 @@ input:checked+.slider:before {
     font-size: 0.9rem;
     text-align: left;
 }
+
 .pandas-table th {
     background: rgba(255, 255, 255, 0.1);
     padding: 12px 15px;
     color: var(--text-primary);
     font-weight: 600;
 }
+
 .pandas-table td {
     padding: 12px 15px;
     border-bottom: 1px solid var(--glass-border);
     color: var(--text-secondary);
 }
+
 .pandas-table tbody tr:hover {
     background: rgba(255, 255, 255, 0.05);
 }
