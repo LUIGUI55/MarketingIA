@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Line Chart: Ventas Históricas ---
     const ctxSales = document.getElementById('salesChart').getContext('2d');
     const gradientSales = ctxSales.createLinearGradient(0, 0, 0, 400);
-    gradientSales.addColorStop(0, 'rgba(0, 112, 243, 0.5)');
-    gradientSales.addColorStop(1, 'rgba(0, 112, 243, 0.0)');
+    gradientSales.addColorStop(0, 'rgba(0, 240, 255, 0.5)');
+    gradientSales.addColorStop(1, 'rgba(0, 240, 255, 0.0)');
 
     new Chart(ctxSales, {
         type: 'line',
@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
                 label: 'Ventas ($)',
                 data: [12916.3, 20182.1, 28019.2, 54702.0, 31102.3, 42103.4, 55201.2, 78103.5, 41203.1, 48201.0],
-                borderColor: '#0070f3',
+                borderColor: '#00f0ff',
                 backgroundColor: gradientSales,
                 borderWidth: 3,
                 tension: 0.4,
                 fill: true,
                 pointBackgroundColor: '#050505',
-                pointBorderColor: '#0070f3',
+                pointBorderColor: '#00f0ff',
                 pointBorderWidth: 2,
                 pointRadius: 4,
                 pointHoverRadius: 6
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: ['USA', 'Spain', 'France', 'Australia', 'Otros'],
             datasets: [{
                 data: [1004, 342, 314, 185, 978],
-                backgroundColor: ['#0070f3', '#7928ca', '#00dfd8', '#ff0080', 'rgba(255, 255, 255, 0.08)'],
+                backgroundColor: ['#00f0ff', '#b026ff', '#00ff88', '#ff0055', 'rgba(255, 255, 255, 0.08)'],
                 borderWidth: 0, hoverOffset: 4
             }]
         },
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
                 label: 'Cantidad',
                 data: [967, 607, 331, 306, 301, 234, 77],
-                backgroundColor: '#7928ca',
+                backgroundColor: '#b026ff',
                 borderRadius: 6
             }]
         },
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: ['Enviado', 'Cancelado', 'Resuelto', 'En Espera', 'En Proceso', 'Disputado'],
             datasets: [{
                 data: [2617, 60, 47, 44, 41, 14],
-                backgroundColor: ['#00dfd8', '#ff0000', '#0070f3', '#f5a623', '#7928ca', '#ff0080'],
+                backgroundColor: ['#00ff88', '#ff003c', '#00f0ff', '#ff7300', '#b026ff', '#ff0055'],
                 borderWidth: 0, hoverOffset: 4
             }]
         },
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: ['Pequeño', 'Mediano', 'Grande'],
             datasets: [{
                 data: [1282, 1384, 157],
-                backgroundColor: ['rgba(0, 112, 243, 0.7)', 'rgba(121, 40, 202, 0.7)', 'rgba(0, 223, 216, 0.7)'],
+                backgroundColor: ['rgba(0, 240, 255, 0.7)', 'rgba(176, 38, 255, 0.7)', 'rgba(0, 255, 136, 0.7)'],
                 borderWidth: 0
             }]
         },
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const renderClusters = (numClusters) => {
             const data3D = [];
-            const colors = ['#0070f3', '#7928ca', '#00dfd8', '#ff0080', '#f5a623', '#ff0000', '#10b981', '#6366f1', '#eab308', '#d946ef'];
+            const colors = ['#00f0ff', '#b026ff', '#00ff88', '#ff0055', '#ff7300', '#ff003c', '#eab308', '#6366f1', '#10b981', '#d946ef'];
             
             for(let i=0; i<numClusters; i++) {
                 const cx = 1000 + Math.random() * 8000;
@@ -177,9 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'heatmap',
             colorscale: [
                 [0, 'rgba(5, 5, 5, 0.8)'],        // Pure Ultra Dark
-                [0.3, 'rgba(0, 112, 243, 0.7)'],  // Elegant Blue
-                [0.7, 'rgba(121, 40, 202, 0.8)'],  // Lilac Purple
-                [1, 'rgba(255, 0, 128, 0.9)']     // Magenta Pink
+                [0.3, 'rgba(0, 240, 255, 0.7)'],  // Neon Cyan
+                [0.7, 'rgba(176, 38, 255, 0.8)'],  // Neon Purple
+                [1, 'rgba(255, 0, 85, 0.9)']     // Magenta Pink
             ],
             text: [
                 [1.00, 0.01, 0.55, 0.02], 

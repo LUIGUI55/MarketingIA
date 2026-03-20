@@ -7,10 +7,10 @@
     --glass-border: rgba(255, 255, 255, 0.04);
     --glass-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.8);
 
-    --accent-blue: #0070f3;
-    --accent-purple: #7928ca;
-    --accent-teal: #00dfd8;
-    --accent-pink: #ff0080;
+    --accent-blue: #00f0ff;
+    --accent-purple: #b026ff;
+    --accent-teal: #00ff88;
+    --accent-pink: #ff0055;
 }
 
 * {
