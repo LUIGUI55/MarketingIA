@@ -103,34 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 6. Plotly 3D Chart ---
+    // --- 6. Plotly 3D Chart (Dynamic) ---
     const plotContainer = document.getElementById('plotly3d-container');
+    const clusterInput = document.getElementById('cluster-input');
+    
     if (plotContainer && typeof Plotly !== 'undefined') {
-        const genCluster = (n, cx, cy, cz, s) => {
-            let x=[], y=[], z=[];
-            for(let i=0; i<n; i++){
-                x.push(cx + (Math.random()-0.5)*s);
-                y.push(cy + (Math.random()-0.5)*s);
-                z.push(cz + (Math.random()-0.5)*s*0.3);
-            }
-            return {x, y, z};
-        };
-
-        const c1 = genCluster(50, 2000, 50, 20, 1000);
-        const c2 = genCluster(50, 5000, 80, 40, 1500);
-        const c3 = genCluster(50, 8000, 120, 60, 2000);
-
-        const data3D = [
-            { x: c1.x, y: c1.y, z: c1.z, mode: 'markers', marker: { size: 5, color: '#3b82f6', opacity: 0.8 }, type: 'scatter3d', name: 'Cluster 1' },
-            { x: c2.x, y: c2.y, z: c2.z, mode: 'markers', marker: { size: 5, color: '#8b5cf6', opacity: 0.8 }, type: 'scatter3d', name: 'Cluster 2' },
-            { x: c3.x, y: c3.y, z: c3.z, mode: 'markers', marker: { size: 5, color: '#14b8a6', opacity: 0.8 }, type: 'scatter3d', name: 'Cluster 3' }
-        ];
-
         const layout3D = {
             margin: { l: 0, r: 0, b: 0, t: 0 },
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
-            font: { color: '#94a3b8', family: 'Inter' },
+            font: { color: '#94a3b8', family: "'Inter', sans-serif" },
             scene: {
                 xaxis: { title: 'Ventas ($)', gridcolor: 'rgba(255,255,255,0.1)', backgroundcolor: 'rgba(0,0,0,0)' },
                 yaxis: { title: 'Precio ($)', gridcolor: 'rgba(255,255,255,0.1)', backgroundcolor: 'rgba(0,0,0,0)' },
@@ -139,7 +121,45 @@ document.addEventListener('DOMContentLoaded', () => {
             legend: { x: 0, y: 1 }
         };
 
-        Plotly.newPlot(plotContainer, data3D, layout3D, {responsive: true});
+        const renderClusters = (numClusters) => {
+            const data3D = [];
+            const colors = ['#3b82f6', '#8b5cf6', '#14b8a6', '#ec4899', '#f59e0b', '#ef4444', '#10b981', '#6366f1', '#eab308', '#d946ef'];
+            
+            for(let i=0; i<numClusters; i++) {
+                const cx = 1000 + Math.random() * 8000;
+                const cy = 20 + Math.random() * 80;
+                const cz = 10 + Math.random() * 40;
+                const spread = 500 + Math.random() * 1500;
+                
+                let x=[], y=[], z=[];
+                for(let j=0; j<60; j++){ // points per cluster
+                    x.push(cx + (Math.random()-0.5)*spread);
+                    y.push(cy + (Math.random()-0.5)*(spread/20));
+                    z.push(cz + (Math.random()-0.5)*(spread/30));
+                }
+                
+                data3D.push({
+                    x: x, y: y, z: z, mode: 'markers', 
+                    marker: { size: 5, color: colors[i % colors.length], opacity: 0.8 }, 
+                    type: 'scatter3d', name: `Cluster ${i+1}`
+                });
+            }
+            Plotly.newPlot(plotContainer, data3D, layout3D, {responsive: true});
+        };
+
+        // Render inicial (K=3)
+        let k = parseInt(clusterInput ? clusterInput.value : 3) || 3;
+        renderClusters(k);
+
+        // Actualizar al teclear o usar las flechas del teclado
+        if (clusterInput) {
+            clusterInput.addEventListener('input', (e) => {
+                let val = parseInt(e.target.value);
+                if(val > 0 && val <= 10) {
+                    renderClusters(val);
+                }
+            });
+        }
     }
 
     // --- Toggle Logic ---

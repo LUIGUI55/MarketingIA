@@ -187,8 +187,12 @@
 
                 <!-- [NEW] Plotly 3D Chart -->
                 <div class="chart-container glass-panel fade-in" id="card-3d" style="animation-delay: 0.38s; grid-column: 1 / -1; height: 500px;">
-                    <div class="chart-header">
+                    <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                         <h3>Clusters K-Means en 3D (Ventas, Precio, Cantidad)</h3>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <label for="cluster-input" style="font-size: 0.9rem; color: var(--text-secondary);">Número de Clústeres (K):</label>
+                            <input type="number" id="cluster-input" value="3" min="1" max="10" style="width: 60px; padding: 6px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.3); color: white; font-family: 'Inter', sans-serif; outline: none;">
+                        </div>
                     </div>
                     <div class="chart-body" id="plotly3d-container">
                         <!-- Plotly chart renders here -->
